@@ -1,11 +1,11 @@
 package project;
 
-public abstract class AllocStatique extends MemoirePrincipale{
+public abstract class AllocStatique extends RAM{
 
-	private ZoneRAM[] Zones = null;
+	private Zone[] Zones = null;
 	
 	
-	public AllocStatique(ZoneRAM[] Z,int numZones, int Taille) {
+	public AllocStatique(Zone[] Z,int numZones, int Taille) {
 		super(numZones,Taille);
 		this.setZones(Z);
 		
@@ -16,8 +16,10 @@ public abstract class AllocStatique extends MemoirePrincipale{
 	public void liberer(Processus P) {
 		for(int i = 0 ; i < this.getZones().length ; i++)
 		{
+			if(!this.getZones()[i].isOccupe()) continue;
 			if(this.getZones()[i].getP().getId() == P.getId())
 			{
+				this.getZones()[i].getP().setInPro(false);
 				this.getZones()[i].clearZone();
 				return;
 			}
@@ -26,20 +28,13 @@ public abstract class AllocStatique extends MemoirePrincipale{
 	}
 	
 	
-	public ZoneRAM[] getZones() {
+	public Zone[] getZones() {
 		return Zones;
 	}
 
-	public void setZones(ZoneRAM[] zones) {
+	public void setZones(Zone[] zones) {
 		Zones = zones;
 	}
-	
-	
-	public void infoMemory() {
-		System.out.println("La taille de votre mémoire:\t" + super.getTailleMemoire());
-		System.out.println("La taille des zones:\t" + this.getZones()[0].getTaille());
-		System.out.println("Le nombre des zones:\t" + (super.getTailleMemoire() / this.getZones()[0].getTaille()));
-		
-	}
+
 
 }

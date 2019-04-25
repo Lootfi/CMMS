@@ -1,13 +1,19 @@
 package project;
-
+import java.util.*;
 public class Processus {
+	Scanner scan = new Scanner(System.in);
+	
+	
 	static int counter = 0;
 	private int id;
 	private int tempsAriv;
 	private int tempsExec;
 	private int tailleAlloc;
 	private String etat = "prêt";
+	private boolean InPro = false;
+	
 	private int idFile;
+	
 	private boolean segmented = false;
 	private Segment[] Segments;
 	
@@ -27,6 +33,8 @@ public class Processus {
 		this.setSegments(Segments);
 		counter++;
 	}
+
+
 
 	public String getEtat() {
 		return etat;
@@ -67,6 +75,10 @@ public class Processus {
 	public void setTempsExec(int tempsExec) {
 		this.tempsExec = tempsExec;
 	}
+	
+	public void decreaseTE() {
+		this.setTempsExec(tempsExec - 1);
+	}
 
 	public int getTailleAlloc() {
 		return tailleAlloc;
@@ -90,6 +102,14 @@ public class Processus {
 
 	public void setSegments(Segment[] segments) {
 		Segments = segments;
+	}
+
+	public boolean isInPro() {
+		return InPro;
+	}
+
+	public void setInPro(boolean pro) {
+		this.InPro = pro;
 	}
 
 }
