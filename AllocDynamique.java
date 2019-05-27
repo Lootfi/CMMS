@@ -10,10 +10,12 @@ public abstract class AllocDynamique extends RAM {
 	public abstract void allouer();
 
 	@Override
-	public void liberer(Processus P) {
+	public void liberer(Processus P) {}
+
+	@Override
+	public void liberer() {
 		
 	}
-
 	@Override
 	public FiledAttente getFilo() {
 		return Filo;
